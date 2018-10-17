@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Client;
 use App\Addresse;
 use Illuminate\Http\Request;
-
+use App\Http\usualMethods\Upload;
 class clientsController extends Controller
 {
     /**
@@ -37,11 +37,17 @@ class clientsController extends Controller
     public function store(Request $request)
     {
         $page = Addresse::create($request->all());
+        $file = $request->file('imageToUpload');
         $client =new Client();
         $client->nom =$request->input('nom');
         $client->email =$request->input('email');
         $client->Tel =$request->input('Tel');
         $client->adresseId= $page->id;
+        if ($file!=null)
+        {
+            $path = Upload::uploadFile($file,'pictures');
+            $client->picture_Path =$path;
+        }
         $client->save();
     }
 
@@ -87,6 +93,12 @@ class clientsController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+       // $adresse =Client::where('id',$id)->get();
+        //$adresseId =$adresse[0]->adresseId;
+        //Client::destroy($id);
+        //Addresse::destroy($adresseId);
+        return redirect('/clients');
+
     }
 }

@@ -12,7 +12,7 @@
                     <h4 class="m-b-0 text-white">Ajouter Client</h4>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ action('ClientsController@store') }}">
+                    <form method="POST" enctype="multipart/form-data" action="{{ action('ClientsController@store') }}">
                         <div class="form-body">
                             {!! csrf_field() !!}
                             <h3 class="card-title">Information general sur le client</h3>
@@ -49,15 +49,13 @@
                             </div>
                             <!--/row-->
 
-
-
                             <div class="row">
                                 <div class="col-lg-7 col-md-6">
                                     <div class="card">
                                         <div class="card-body">
                                             <h4 class="card-title">File Upload2</h4>
                                             <label for="input-file-now-custom-1">You can add a default value</label>
-                                            <input type="file" id="input-file-now-custom-1" class="dropify" data-default-file="/assets/node_modules/dropify/src/images/test-image-1.jpg" />
+                                            <input name="imageToUpload" type="file" id="input-file-now-custom-1" class="dropify" data-default-file="/assets/node_modules/dropify/src/images/test-image-1.jpg" />
                                         </div>
                                     </div>
                                 </div>

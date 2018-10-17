@@ -53,12 +53,16 @@
                                                     <td>{{$row->addresse->pays}}</td>
                                                     <td>{{$row->addresse->etat}}</td>
                                                     <td>
-                                                        <button type="button" class="btn btn-danger" data-toggle="tooltip" data-original-title="Edit"  aria-describedby="tooltip908296"  aria-expanded="false">
+                                                        <button  class="btn btn-danger" data-toggle="tooltip" data-original-title="Edit"  aria-describedby="tooltip908296"  aria-expanded="false">
                                                             <i class="ti-settings"></i>
                                                         </button>
-                                                        <button type="button" class="btn btn-info " data-toggle="tooltip" data-original-title="Delete"  aria-describedby="tooltip908296" aria-expanded="false">
-                                                            <i class="ti-trash"></i>
-                                                        </button>
+                                                        <form action="{{ route('clients.destroy', $row->id) }}" method="POST">
+                                                            @method('DELETE')
+                                                            @csrf
+                                                            <button  class="btn btn-info " data-toggle="tooltip" data-original-title="Delete"  aria-describedby="tooltip908296" aria-expanded="false">
+                                                                <i class="ti-trash"></i>
+                                                            </button>
+                                                        </form>
 
                                                     </td>
                                                 </tr>
