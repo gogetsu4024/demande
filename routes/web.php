@@ -25,3 +25,4 @@ Route::get('/home', 'HomeController@index');
 Route::get('/test', 'HomeController@index2');
 Route::resource('/posts','PostsController');
 Route::resource('/clients','ClientsController');
+Route::resource('/projets','ProjetsController');

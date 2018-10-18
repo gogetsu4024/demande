@@ -101,11 +101,9 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Country</label>
-                                        <select name="pays" class="form-control custom-select">
-                                            <option>--Select your Country--</option>
-                                            <option>India</option>
-                                            <option>Sri Lanka</option>
-                                            <option>USA</option>
+                                        <select id="select" name="pays" class="form-control custom-select">
+                                            <option disabled selected>--Select your Country--</option>
+
                                         </select>
                                     </div>
                                 </div>
@@ -129,6 +127,12 @@
     <script>
         $(document).ready(function() {
             // Basic
+            $.getJSON("/assets/names.json", function(json){
+                $.each(json, function(i, obj){
+                        $('#select').append($('<option>').text(obj).attr('value', obj));
+                });
+            });
+
             $('.dropify').dropify();
 
             // Translated

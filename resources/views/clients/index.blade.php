@@ -1,7 +1,5 @@
 @extends('layouts.app')
 @section('css-includes')
-    <link rel="stylesheet" href="assets/node_modules/dropify/dist/css/dropify.min.css">
-    <link href="css/style.min.css" rel="stylesheet">
 
 @endsection
 @section('content')
@@ -17,8 +15,11 @@
                             <hr>
                             <div class="card-body">
                                 <h4 class="card-title">Data Export</h4>
-                                <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
-                                <div class="table-responsive m-t-40">
+                                <div class="row">
+                                <div class="col-10">  <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6></div>
+                                <div class="col-2"><a href="{{route('clients.create')}}" type="button" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Create New</a></div>
+                                </div>
+                                    <div class="table-responsive">
                                     <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                         <tr>
@@ -53,9 +54,9 @@
                                                     <td>{{$row->addresse->pays}}</td>
                                                     <td>{{$row->addresse->etat}}</td>
                                                     <td>
-                                                        <button  class="btn btn-danger" data-toggle="tooltip" data-original-title="Edit"  aria-describedby="tooltip908296"  aria-expanded="false">
+                                                        <a href="{{ route('clients.edit', $row->id) }}"  class="btn btn-danger" data-toggle="tooltip" data-original-title="Edit"  aria-describedby="tooltip908296"  aria-expanded="false">
                                                             <i class="ti-settings"></i>
-                                                        </button>
+                                                        </a>
                                                         <form action="{{ route('clients.destroy', $row->id) }}" method="POST">
                                                             @method('DELETE')
                                                             @csrf
