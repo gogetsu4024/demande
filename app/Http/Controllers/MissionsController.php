@@ -1,15 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Mission;
 use Illuminate\Http\Request;
-use App\Projet;
-use App\Client;
-class ProjetsController extends Controller
+
+class MissionsController extends Controller
 {
-    /**
-     * ProjetsController constructor.
-     */
+
     /**
      * Display a listing of the resource.
      *
@@ -17,8 +14,8 @@ class ProjetsController extends Controller
      */
     public function index()
     {
-        $projets=Projet::all();
-        return view('projets.index')->with('projets',$projets);
+        $mission = Mission::all();
+        return view('missions.index')->with('missions',$mission);
     }
 
     /**
@@ -28,8 +25,7 @@ class ProjetsController extends Controller
      */
     public function create()
     {
-        $clients=Client::all();
-        return view('projets.create')->with('clients',$clients);
+        return view('missions.create');
     }
 
     /**
@@ -40,7 +36,8 @@ class ProjetsController extends Controller
      */
     public function store(Request $request)
     {
-        $page = Projet::create($request->all());
+        Mission::create($request->all());
+        return redirect('/missions');
     }
 
     /**
@@ -51,7 +48,7 @@ class ProjetsController extends Controller
      */
     public function show($id)
     {
-
+        //
     }
 
     /**
@@ -62,9 +59,8 @@ class ProjetsController extends Controller
      */
     public function edit($id)
     {
-        $projet= Projet::where('id',$id)->get();
-        $clients= Client::all();
-        return view('projets.edit')->with('projet',$projet[0])->with('clients',$clients);
+        $mission = Mission::find($id);
+        return view('missions.edit')->with('mission',$mission);
 
     }
 
@@ -77,9 +73,9 @@ class ProjetsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $projet = Projet::find($id);
-        $projet->update($request->all());
-        return redirect('/projets');
+        $mission = Mission::find($id);
+        $mission->update($request->all());
+        return redirect('/missions');
     }
 
     /**
@@ -90,7 +86,7 @@ class ProjetsController extends Controller
      */
     public function destroy($id)
     {
-        Projet::destroy($id);
-        return redirect('/projets');
+        Mission::destroy($id);
+        return redirect('/missions');
     }
 }

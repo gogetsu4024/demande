@@ -3,11 +3,12 @@
 
 @endsection
 @section('content')
+
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header bg-info">
-                    <h4 class="m-b-0 text-white">Listes des clients</h4>
+                    <h4 class="m-b-0 text-white">Listes des missions</h4>
                 </div>
                 <div class="card-body">
                         <div class="form-body">
@@ -17,48 +18,36 @@
                                 <h4 class="card-title">Data Export</h4>
                                 <div class="row">
                                 <div class="col-10">  <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6></div>
-                                <div class="col-2"><a href="{{route('clients.create')}}" type="button" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Create New</a></div>
+                                <div class="col-2"><a href="{{route('missions.create')}}" type="button" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Create New</a></div>
                                 </div>
                                     <div class="table-responsive">
                                     <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                         <tr>
-                                            <th>picture</th>
-                                            <th>name</th>
-                                            <th>Email</th>
-                                            <th>Tel</th>
-                                            <th>Pays</th>
-                                            <th>Etat</th>
+                                            <th>nom</th>
+                                            <th>Description</th>
                                             <th>Action</th>
                                         </tr>
                                         </thead>
                                         <tfoot>
                                         <tr>
-                                            <th>picture</th>
-                                            <th>name</th>
-                                            <th>Email</th>
-                                            <th>Tel</th>
-                                            <th>Pays</th>
-                                            <th>Etat</th>
+                                            <th>nom</th>
+                                            <th>Description</th>
                                             <th>Action</th>
                                         </tr>
                                         </tfoot>
                                         <tbody>
-                                        @if(count($clients)!=0)
-                                            @foreach($clients as $row)
+                                        @if(count($missions)!=0)
+                                            @foreach($missions as $row)
                                                 <tr>
-                                                    <td><img src="{{$row->picture_Path}}" alt="user" width="40" class="img-circle"></td>
                                                     <td>{{$row->nom}}</td>
-                                                    <td>{{$row->email}}</td>
-                                                    <td>{{$row->Tel}}</td>
-                                                    <td>{{$row->addresse->pays}}</td>
-                                                    <td>{{$row->addresse->etat}}</td>
+                                                    <td>{!! $row->description !!}</td>
                                                     <td>
                                                         <div class="row">
-                                                        <a href="{{ route('clients.edit', $row->id) }}"  class="btn btn-danger" data-toggle="tooltip" data-original-title="Edit"  aria-describedby="tooltip908296"  aria-expanded="false">
+                                                        <a href="{{ route('missions.edit', $row->id) }}"  class="btn btn-danger" data-toggle="tooltip" data-original-title="Edit"  aria-describedby="tooltip908296"  aria-expanded="false">
                                                             <i class="ti-settings"></i>
                                                         </a>
-                                                        <form action="{{ route('clients.destroy', $row->id) }}" method="POST">
+                                                        <form action="{{ route('missions.destroy', $row->id) }}" method="POST">
                                                             @method('DELETE')
                                                             @csrf
                                                             <button  class="btn btn-info " data-toggle="tooltip" data-original-title="Delete"  aria-describedby="tooltip908296" aria-expanded="false">

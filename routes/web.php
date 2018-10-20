@@ -11,18 +11,26 @@
 |
 */
 
-Route::get('/', 'PagesController@index');
+
 /*Route::get('/users/{id} ', function ($id) {
     return $id;
 });*/
-Route::get('/about', 'PagesController@about');
-Route::get('/services', 'PagesController@services');
-
 
 Auth::routes();
+Route::middleware('admin')->group(function ()
+{
+    Route::get('/logout', 'Auth\LoginController@logout')->name('logout' );
+});
+Route::middleware('member')->group(function ()
+{
+    Route::get('/', 'HomeController@index2');
+    Route::get('/calendrier', 'CalendrierController@index')->name('calendrier.index');
+    Route::resource('/clients','ClientsController');
+    Route::resource('/projets','ProjetsController');
+    Route::resource('/missions','MissionsController');
+    Route::get('/logout', 'Auth\LoginController@logout')->name('logout' );
+});
 
-Route::get('/home', 'HomeController@index');
-Route::get('/test', 'HomeController@index2');
-Route::resource('/posts','PostsController');
-Route::resource('/clients','ClientsController');
-Route::resource('/projets','ProjetsController');
+Route::get('/unauthorised', function () {
+    return view('unauthorized');
+});

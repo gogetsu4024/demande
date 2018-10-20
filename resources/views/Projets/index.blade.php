@@ -1,14 +1,39 @@
 @extends('layouts.app')
 @section('css-includes')
 
-
 @endsection
 @section('content')
+    <div id="responsive-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; margin-top: 5%;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Content is Responsive</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">Recipient:</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">Message:</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger waves-effect waves-light">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header bg-info">
-                    <h4 class="m-b-0 text-white">Listes des clients</h4>
+                    <h4 class="m-b-0 text-white">Listes des projets</h4>
                 </div>
                 <div class="card-body">
                         <div class="form-body">
@@ -46,9 +71,16 @@
                                                 <tr>
                                                     <td>{{$row->nom}}</td>
                                                     <td>{!! $row->description !!}</td>
-                                                    <td>{{$row->client->nom}}</td>
+                                                    <td>{{$row->client->nom}}
+                                                        <span data-toggle="modal" data-target="#responsive-modal">
+                                                        <button  class="btn btn-dark btn-circle " data-toggle="tooltip"  data-original-title="Client info"  aria-describedby="tooltip908296" aria-expanded="false">
+                                                            <i class="ti-bolt"></i>
+                                                        </button>
+                                                            </span>
+                                                    </td>
                                                     <td>{{$row->client->Tel}}</td>
                                                     <td>
+                                                        <div class="row">
                                                         <a href="{{ route('projets.edit', $row->id) }}"  class="btn btn-danger" data-toggle="tooltip" data-original-title="Edit"  aria-describedby="tooltip908296"  aria-expanded="false">
                                                             <i class="ti-settings"></i>
                                                         </a>
@@ -59,7 +91,7 @@
                                                                 <i class="ti-trash"></i>
                                                             </button>
                                                         </form>
-
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             @endforeach
